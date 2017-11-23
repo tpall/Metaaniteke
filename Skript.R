@@ -1,7 +1,23 @@
-Katse <- "C:/Users/Triin/Desktop/Katse_28.02.2016.txt"
-Tabel <- read.table(Katse, sep="\t", header=T, stringsAsFactors = F)
+library(tidyverse)
+# Kasutame seda faili, sest siin on üheselt määratud delimiterid
+# Soovitav oleks eemaldada tühikud failinimest st fail ümber nimetada
+# asendades tühikud alakriipsuga _
+Katse <- "28.02.2016_katse_metaanitekke_andmed.csv"
 
-Gr_katse26 <- ggplot(data=Tabel, aes(x=Aeg.p, y=Katse.26, group=1))+
-  geom_line()+
-  labs(x="aeg, p�eva", y="�hikud", title="Pealkiri")
+# Impordime andmed
+# Kuna murdarvudes on komad, siis oleks kõik tulbad tekst
+# muuda localet impordi funktsioonis, et imporditaks numbritena
+Tabel <- read_delim(Katse, delim = ";", locale = locale(decimal_mark = ","))
+Tabel
+
+# Parandame tulpade nimed
+colnames(Tabel) <- make.names(colnames(Tabel))
+
+# Plotime andmed
+Gr_katse26 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.26, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Ühikud", title = "Pealkiri")
 Gr_katse26
+
+
+
