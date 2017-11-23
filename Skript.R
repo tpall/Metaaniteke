@@ -2,6 +2,8 @@ library(tidyverse)
 # Kasutame seda faili, sest siin on üheselt määratud delimiterid
 # Soovitav oleks eemaldada tühikud failinimest st fail ümber nimetada
 # asendades tühikud alakriipsuga _
+# NB!!! Pane tähele, et kasutan suhtelist path-i st eeldan, 
+# et fail asub projekti root dir-is
 Katse <- "28.02.2016_katse_metaanitekke_andmed.csv"
 
 # Impordime andmed
