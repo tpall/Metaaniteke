@@ -39,5 +39,5 @@ Gr_katse30 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.30, group = 1)) +
   labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 30")
 Gr_katse30
 
-# Kõik aktseandmed on nüüd sisestatud
+# Kõik katseandmed on nüüd sisestatud
 
