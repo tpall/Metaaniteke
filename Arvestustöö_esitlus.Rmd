@@ -1,81 +1,84 @@
 ---
-title: "Metaaniteke"
+title: "Methanogenesis analysis"
 author: "Triin Korb, Anne Menert"
-date: "27 november 2017"
-output: ioslides_presentation
+date: "29.11.2017"
+output: 
+  ioslides_presentation: 
+    smaller: true
+    font_adjustment: -5
+    widescreen: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-## Data
-
-Gas generation by different microbial consortias in 4 biodegradation experiments.
+## Data of gas generation by different microbial consortias in 4 biodegradation experiments {.smaller}
+###Aims:  
+ - to blot data data and to evaluate data with different models, to estimate the speed, maximum rate and the lag phase of methanogenesis.
+     
 ![Caption for the picture.](C:\Users\Triin\Desktop\Pilt1.png)
 
-## Graafik1 {.flexbox .vcenter}
+## Methanogenesis in experiment 26 {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Rplot.png)
 
-## Graafik2 {.flexbox .vcenter}
+## Methanogenesis in experiment 28 {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Rplot01.png)
 
-## Graafik3 {.flexbox .vcenter}
+## Methanogenesis in experiment 29 {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Rplot02.png)
 
-## Graafik4 {.flexbox .vcenter}
+## Methanogenesis in experiment 30 {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Rplot03.png)
+![](C:\Users\Triin\Desktop\Rplot03.png)  
 
 ## lähendame Katse 26 andmeid lineaarfunktsiooniga
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+lineaarne_mudel <- nls(y ~ b*x1 + d)  
+summary(lineaarne_mudel)  
+
+### Plotime lähendatud katseandmed 
+b <- 0.1771  
+d <- 0.4629  
+x <-  0:70   
+y <- b * x + d  
+plot(y~x, type="l", xlab = "Time, days", ylab = "Methan, mL/g", 
+    ylim = c(-5, 15)) 
+
+## lähendame Katse 26 andmeid lineaarfunktsiooniga {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Katse26_lineaarne.png)
 
-
-
 ## lähendame Katse 26 andmeid ruutfunktsiooniga
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+ruut_mudel <- nls(y ~ a*x1*x1 + b*x1 + d)  
+summary(ruut_mudel)  
+
+### Plotime lähendatud katseandmed
+a <- -0.4909  
+b <- 3.1927  
+d <- -3.0436  
+x <-  0:70  
+y <-  a * x * x + b * x + d  
+plot(y ~ x, type = "l",xlab = "Time, days",ylab = "Methan mL/g",ylim = c(-2500, 5))
+
+## lähendame Katse 26 andmeid ruutfunktsiooniga {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Katse26_ruutfunktsioon.png)
 
-## Lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit 
-(7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)
+## lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit 
+(7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)  
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+data <- data.frame(x1,y1)  
+nlsplot(data, model = 7, start = c(a = 1, b = 1, c = 1, d = 1, e = 1),  
+        xlab = "Explanatory Variable" , ylab = "Response Variable", position = 1)  
+summary(model.nls)
 
-![](C:\Users\Triin\Desktop\Katse26_nlsfit.png)
+## Lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit {.flexbox .vcenter}
 
-
-## R Markdown
-
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
-
-
-
-## Slide with Bullets
-
-- Bullet 1 nt Kats 26
-- Bullet 2 nt Katse 28
-- Bullet 3 nt Katse 29
-
-1. Katse 26
-2. Katse 28
-3. Katse 29
-
-Plaine text
-
-*italicized text*
-
-**bold text**
-
-"for (i %in% 1:10)"
-
-
-
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
-```
-
+![](C:\Users\Triin\Desktop\Katse26_nlsfit.png)  
