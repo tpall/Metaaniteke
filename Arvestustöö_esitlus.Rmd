@@ -1,0 +1,81 @@
+---
+title: "Metaaniteke"
+author: "Triin Korb, Anne Menert"
+date: "27 november 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Data
+
+Gas generation by different microbial consortias in 4 biodegradation experiments.
+![Caption for the picture.](C:\Users\Triin\Desktop\Pilt1.png)
+
+## Graafik1 {.flexbox .vcenter}
+
+![](C:\Users\Triin\Desktop\Rplot.png)
+
+## Graafik2 {.flexbox .vcenter}
+
+![](C:\Users\Triin\Desktop\Rplot01.png)
+
+## Graafik3 {.flexbox .vcenter}
+
+![](C:\Users\Triin\Desktop\Rplot02.png)
+
+## Graafik4 {.flexbox .vcenter}
+
+![](C:\Users\Triin\Desktop\Rplot03.png)
+
+## lähendame Katse 26 andmeid lineaarfunktsiooniga
+
+![](C:\Users\Triin\Desktop\Katse26_lineaarne.png)
+
+
+
+## lähendame Katse 26 andmeid ruutfunktsiooniga
+
+![](C:\Users\Triin\Desktop\Katse26_ruutfunktsioon.png)
+
+## Lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit 
+(7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)
+
+![](C:\Users\Triin\Desktop\Katse26_nlsfit.png)
+
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+
+
+## Slide with Bullets
+
+- Bullet 1 nt Kats 26
+- Bullet 2 nt Katse 28
+- Bullet 3 nt Katse 29
+
+1. Katse 26
+2. Katse 28
+3. Katse 29
+
+Plaine text
+
+*italicized text*
+
+**bold text**
+
+"for (i %in% 1:10)"
+
+
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
