@@ -12,7 +12,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-## Data of gas generation by different microbial consortias in 4 biodegradation experiments {.smaller}
+## Data of gas generation by different microbial consortia in 4 biodegradation experiments {.smaller}
 ###Aims:  
  - to blot data data and to evaluate data with different models, to estimate the speed, maximum rate and the lag phase of methanogenesis.
      
@@ -34,13 +34,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ![](C:\Users\Triin\Desktop\Rplot03.png)  
 
-## lähendame Katse 26 andmeid lineaarfunktsiooniga
+## We fit the data of experiment 26 with linear function
 x1 <- Tabel[, 1]  
 y1 <- Tabel[, 2]  
 lineaarne_mudel <- nls(y ~ b*x1 + d)  
 summary(lineaarne_mudel)  
 
-### Plotime lähendatud katseandmed 
+### Let us plot the fitted experimental data
 b <- 0.1771  
 d <- 0.4629  
 x <-  0:70   
@@ -48,17 +48,17 @@ y <- b * x + d
 plot(y~x, type="l", xlab = "Time, days", ylab = "Methan, mL/g", 
     ylim = c(-5, 15)) 
 
-## lähendame Katse 26 andmeid lineaarfunktsiooniga {.flexbox .vcenter}
+## Fitted the data of experiment 26 with linear function {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Katse26_lineaarne.png)
 
-## lähendame Katse 26 andmeid ruutfunktsiooniga
+## We fit the data of experiment 26 with square function
 x1 <- Tabel[, 1]  
 y1 <- Tabel[, 2]  
 ruut_mudel <- nls(y ~ a*x1*x1 + b*x1 + d)  
 summary(ruut_mudel)  
 
-### Plotime lähendatud katseandmed
+### Let us plot the fitted experimental data
 a <- -0.4909  
 b <- 3.1927  
 d <- -3.0436  
@@ -66,11 +66,11 @@ x <-  0:70
 y <-  a * x * x + b * x + d  
 plot(y ~ x, type = "l",xlab = "Time, days",ylab = "Methan mL/g",ylim = c(-2500, 5))
 
-## lähendame Katse 26 andmeid ruutfunktsiooniga {.flexbox .vcenter}
+## Fitted the data of experiment 26 with sqare function {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Katse26_ruutfunktsioon.png)
 
-## lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit 
+##  We fit the data of experiment 26 with logistic function from easynls package
 (7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)  
 x1 <- Tabel[, 1]  
 y1 <- Tabel[, 2]  
@@ -79,6 +79,6 @@ nlsplot(data, model = 7, start = c(a = 1, b = 1, c = 1, d = 1, e = 1),
         xlab = "Explanatory Variable" , ylab = "Response Variable", position = 1)  
 summary(model.nls)
 
-## Lähendame Katse 26 andmeid erinevate funktsioonidega paketis nlsfit {.flexbox .vcenter}
+## Fitted the data of experiment 26 with function from nlsfit easynls {.flexbox .vcenter}
 
 ![](C:\Users\Triin\Desktop\Katse26_nlsfit.png)  
