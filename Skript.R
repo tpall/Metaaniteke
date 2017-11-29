@@ -13,14 +13,32 @@ Tabel <- read.delim(Katse, sep = ";", dec = ",")
 Tabel <- read_delim(Katse, delim = ";", locale = locale(decimal_mark = ","))
 Tabel
 
-# Parandame tulpade nimed
+# Parandame tulpade nimedhttps://github.com/tkorb/Metaaniteke.git
 colnames(Tabel) <- make.names(colnames(Tabel))
 
-# Plotime andmed
+# Plotime Katse 26 andmed
 Gr_katse26 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.26, group = 1)) +
   geom_line() +
-  labs(x = "Aeg, päeva", y = "Ühikud", title = "Pealkiri")
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 26")
 Gr_katse26
 
+# Plotime Katse 28 andmed
+Gr_katse28 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.28, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 28")
+Gr_katse28
 
+# Plotime Katse 29 andmed
+Gr_katse29 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.29, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 29")
+Gr_katse29
+
+# Plotime Katse 30 andmed
+Gr_katse30 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.30, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 30")
+Gr_katse30
+
+# Kõik katseandmed on nüüd sisestatud
 

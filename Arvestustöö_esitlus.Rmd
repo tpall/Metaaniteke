@@ -1,0 +1,84 @@
+---
+title: "Methanogenesis analysis"
+author: "Triin Korb, Anne Menert"
+date: "29.11.2017"
+output: 
+  ioslides_presentation: 
+    smaller: true
+    font_adjustment: -5
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Data of gas generation by different microbial consortia in 4 biodegradation experiments {.smaller}
+###Aims:  
+ - to blot data data and to evaluate data with different models, to estimate the speed, maximum rate and the lag phase of methanogenesis.
+     
+![Caption for the picture.](Pilt1.png)
+
+## Methanogenesis in experiment 26 {.flexbox .vcenter}
+
+![](Rplot.png)
+
+## Methanogenesis in experiment 28 {.flexbox .vcenter}
+
+![](Rplot01.png)
+
+## Methanogenesis in experiment 29 {.flexbox .vcenter}
+
+![](Rplot02.png)
+
+## Methanogenesis in experiment 30 {.flexbox .vcenter}
+
+![](Rplot03.png)  
+
+## We fit the data of experiment 26 with linear function
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+lineaarne_mudel <- nls(y ~ b*x1 + d)  
+summary(lineaarne_mudel)  
+
+### Let us plot the fitted experimental data
+b <- 0.1771  
+d <- 0.4629  
+x <-  0:70   
+y <- b * x + d  
+plot(y~x, type="l", xlab = "Time, days", ylab = "Methan, mL/g", 
+    ylim = c(-5, 15)) 
+
+## Fitted the data of experiment 26 with linear function {.flexbox .vcenter}
+
+![](Katse26_lineaarne.png)
+
+## We fit the data of experiment 26 with square function
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+ruut_mudel <- nls(y ~ a*x1*x1 + b*x1 + d)  
+summary(ruut_mudel)  
+
+### Let us plot the fitted experimental data
+a <- -0.4909  
+b <- 3.1927  
+d <- -3.0436  
+x <-  0:70  
+y <-  a * x * x + b * x + d  
+plot(y ~ x, type = "l",xlab = "Time, days",ylab = "Methan mL/g",ylim = c(-2500, 5))
+
+## Fitted the data of experiment 26 with sqare function {.flexbox .vcenter}
+
+![](Katse26_ruutfunktsioon.png)
+
+##  We fit the data of experiment 26 with logistic function from easynls package
+(7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)  
+x1 <- Tabel[, 1]  
+y1 <- Tabel[, 2]  
+data <- data.frame(x1,y1)  
+nlsplot(data, model = 7, start = c(a = 1, b = 1, c = 1, d = 1, e = 1),  
+        xlab = "Explanatory Variable" , ylab = "Response Variable", position = 1)  
+summary(model.nls)
+
+## Fitted the data of experiment 26 with function from nlsfit easynls {.flexbox .vcenter}
+
+![](Katse26_nlsfit.png)
