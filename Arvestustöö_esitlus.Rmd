@@ -2,83 +2,134 @@
 title: "Methanogenesis analysis"
 author: "Triin Korb, Anne Menert"
 date: "29.11.2017"
-output: 
-  ioslides_presentation: 
-    smaller: true
-    font_adjustment: -5
+output:
+  ioslides_presentation:
     widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, out.width = '50%', fig.align = 'center')
 ```
-## Data of gas generation by different microbial consortia in 4 biodegradation experiments {.smaller}
-###Aims:  
- - to blot data data and to evaluate data with different models, to estimate the speed, maximum rate and the lag phase of methanogenesis.
-     
-![Caption for the picture.](Pilt1.png)
+# Data of gas generation by different microbial consortia in 4 biodegradation experiments
 
-## Methanogenesis in experiment 26 {.flexbox .vcenter}
+## Aims
 
-![](Rplot.png)
+- To visualise and evaluate data with different models, 
+- to estimate the speed, maximum rate and the lag phase of methanogenesis.
 
-## Methanogenesis in experiment 28 {.flexbox .vcenter}
+```{r, echo=FALSE}
+knitr::include_graphics("Pilt1.png")
+```
 
-![](Rplot01.png)
+## Import data
 
-## Methanogenesis in experiment 29 {.flexbox .vcenter}
+```{r}
+Katse <- "28.02.2016_katse_metaanitekke_andmed.csv"
+Tabel <- read.delim(Katse, sep = ";", dec = ",")
+head(Tabel)
+```
 
-![](Rplot02.png)
 
-## Methanogenesis in experiment 30 {.flexbox .vcenter}
+## Methanogenesis in experiment 26
 
-![](Rplot03.png)  
+```{r}
+library(ggplot2)
+Gr_katse26 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.26, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 26")
+Gr_katse26
+```
+
+## Methanogenesis in experiment 28
+
+```{r}
+Gr_katse28 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.28, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 28")
+Gr_katse28
+```
+
+## Methanogenesis in experiment 29
+
+```{r}
+Gr_katse29 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.29, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 29")
+Gr_katse29
+```
+
+## Methanogenesis in experiment 30
+
+```{r}
+Gr_katse30 <- ggplot(data = Tabel, aes(x = Aeg.p, y = Katse.30, group = 1)) +
+  geom_line() +
+  labs(x = "Aeg, päeva", y = "Metaani ml/g", title = "Katse 30")
+Gr_katse30
+```  
 
 ## We fit the data of experiment 26 with linear function
+
+```{r}
 x1 <- Tabel[, 1]  
 y1 <- Tabel[, 2]  
-lineaarne_mudel <- nls(y ~ b*x1 + d)  
+lineaarne_mudel <- nls(y1 ~ b*x1 + d)  
 summary(lineaarne_mudel)  
+```
 
-### Let us plot the fitted experimental data
+## Let us plot the fitted experimental data
+
+```{r}
 b <- 0.1771  
 d <- 0.4629  
 x <-  0:70   
 y <- b * x + d  
-plot(y~x, type="l", xlab = "Time, days", ylab = "Methan, mL/g", 
+plot(y ~ x, type="l", xlab = "Time, days", ylab = "Methan, mL/g", 
     ylim = c(-5, 15)) 
+```
 
 ## Fitted the data of experiment 26 with linear function {.flexbox .vcenter}
 
-![](Katse26_lineaarne.png)
+```{r, out.width='100%'}
+knitr::include_graphics("Katse26_lineaarne.png")
+```
 
 ## We fit the data of experiment 26 with square function
+
+```{r}
 x1 <- Tabel[, 1]  
 y1 <- Tabel[, 2]  
-ruut_mudel <- nls(y ~ a*x1*x1 + b*x1 + d)  
+ruut_mudel <- nls(y1 ~ a*x1*x1 + b*x1 + d)  
 summary(ruut_mudel)  
+```
 
-### Let us plot the fitted experimental data
+## Let us plot the fitted experimental data
+
+```{r}
 a <- -0.4909  
 b <- 3.1927  
 d <- -3.0436  
 x <-  0:70  
 y <-  a * x * x + b * x + d  
-plot(y ~ x, type = "l",xlab = "Time, days",ylab = "Methan mL/g",ylim = c(-2500, 5))
+plot(y ~ x, type = "l",xlab = "Time, days", ylab = "Methan mL/g",ylim = c(-2500, 5))
+```
 
 ## Fitted the data of experiment 26 with sqare function {.flexbox .vcenter}
 
-![](Katse26_ruutfunktsioon.png)
+```{r, out.width='100%'}
+knitr::include_graphics("Katse26_ruutfunktsioon.png")
+```
 
 ##  We fit the data of experiment 26 with logistic function from easynls package
-(7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)  
-x1 <- Tabel[, 1]  
-y1 <- Tabel[, 2]  
-data <- data.frame(x1,y1)  
-nlsplot(data, model = 7, start = c(a = 1, b = 1, c = 1, d = 1, e = 1),  
-        xlab = "Explanatory Variable" , ylab = "Response Variable", position = 1)  
-summary(model.nls)
 
-## Fitted the data of experiment 26 with function from nlsfit easynls {.flexbox .vcenter}
+```{r}
+library(easynls)
+fit <- nlsfit(Tabel[,1:2], model = 7)
+fit
+```
 
-![](Katse26_nlsfit.png)
+## Fitted the data of experiment 26 with function from nlsfit easynls
+
+```{r}
+nlsplot(Tabel[,1:2], model = 7)
+```
