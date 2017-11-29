@@ -9,6 +9,7 @@ Katse <- "28.02.2016_katse_metaanitekke_andmed.csv"
 # Impordime andmed
 # Kuna murdarvudes on komad, siis oleks kõik tulbad tekst
 # muuda localet impordi funktsioonis, et imporditaks numbritena
+Tabel <- read.delim(Katse, sep = ";", dec = ",")
 Tabel <- read_delim(Katse, delim = ";", locale = locale(decimal_mark = ","))
 Tabel
 
