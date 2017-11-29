@@ -16,23 +16,23 @@ knitr::opts_chunk$set(echo = FALSE)
 ###Aims:  
  - to blot data data and to evaluate data with different models, to estimate the speed, maximum rate and the lag phase of methanogenesis.
      
-![Caption for the picture.](C:\Users\Triin\Desktop\Pilt1.png)
+![Caption for the picture.](Pilt1.png)
 
 ## Methanogenesis in experiment 26 {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Rplot.png)
+![](Rplot.png)
 
 ## Methanogenesis in experiment 28 {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Rplot01.png)
+![](Rplot01.png)
 
 ## Methanogenesis in experiment 29 {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Rplot02.png)
+![](Rplot02.png)
 
 ## Methanogenesis in experiment 30 {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Rplot03.png)  
+![](Rplot03.png)  
 
 ## We fit the data of experiment 26 with linear function
 x1 <- Tabel[, 1]  
@@ -50,7 +50,7 @@ plot(y~x, type="l", xlab = "Time, days", ylab = "Methan, mL/g",
 
 ## Fitted the data of experiment 26 with linear function {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Katse26_lineaarne.png)
+![](Katse26_lineaarne.png)
 
 ## We fit the data of experiment 26 with square function
 x1 <- Tabel[, 1]  
@@ -68,7 +68,7 @@ plot(y ~ x, type = "l",xlab = "Time, days",ylab = "Methan mL/g",ylim = c(-2500, 
 
 ## Fitted the data of experiment 26 with sqare function {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Katse26_ruutfunktsioon.png)
+![](Katse26_ruutfunktsioon.png)
 
 ##  We fit the data of experiment 26 with logistic function from easynls package
 (7 = "y~a*(1+b*(exp(-c*x)))^-1" logistic)  
@@ -81,4 +81,4 @@ summary(model.nls)
 
 ## Fitted the data of experiment 26 with function from nlsfit easynls {.flexbox .vcenter}
 
-![](C:\Users\Triin\Desktop\Katse26_nlsfit.png)  
+![](Katse26_nlsfit.png)
